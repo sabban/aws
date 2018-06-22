@@ -62,9 +62,10 @@ if default region it's us-east-1
 * cross region replication needs for versioning
 * cross region replication works for *NEW* objects
 * when update an objects ALL versions are replicated
-* cannot replicate to multiple buckets or use daisy chaing (MUST BE VERIFIED)
-* Delete markers are replicated
+* cannot replicate to multiple buckets or use daisy chaining 
+* Delete markers are replicated, deleted versions of files are not.
 * Delete individual versions or delete markers will not be replicated
+* encrypted bucket are replicated
 
 ## Different tiers
 * Standard (durable, immediatly available, frequently accessed)
