@@ -210,11 +210,22 @@ Validation with sha-256 with public key against AWS' private key
 Stored indefinitely (not user S3)
 
 ## Cloudwatch Events
-*Events:
+Near real-time stream of system events
+* Events:
  * AWS ressource state change
  * Aws CloudTrail (API calls)
  * custom events (code)
  * scheduled
 *Rules
-*Targets
+*Targets (lambda, SNS, SQS, Kinesis)
 
+FAQ https://aws.amazon.com/cloudwatch/faqs
+
+# AWS Config
+* Enables
+ * Compliance auditing
+ * Security analysis
+ * Rsource tracking
+* Provides
+ * Configurations snapshots and logs config changes of AWS resources
+ * Automated compliance checking
