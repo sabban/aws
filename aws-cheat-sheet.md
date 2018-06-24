@@ -193,10 +193,28 @@ Muti-tenant
 # AWS CloudHSM
 dedicated required for FIPS 140-2 Compliance
 
-# Videos seen
-000 -> 029
-039 -> 042
-043
-047 -> 057
+# Cloudtrail
+* Send to S3 bucket
+* delivered every 5 (active) minutes  with up to 15 minutes delay
+* notifications available
+* can be aggregated accross regions
+* can be aggregated accross accounts
+Validation with sha-256 with public key against AWS' private key
 
+# Cloudwatch
+
+## Cloudwatch
+* monitoring
+
+## Cloudwatch Logs
+Stored indefinitely (not user S3)
+
+## Cloudwatch Events
+*Events:
+ * AWS ressource state change
+ * Aws CloudTrail (API calls)
+ * custom events (code)
+ * scheduled
+*Rules
+*Targets
 
