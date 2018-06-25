@@ -222,29 +222,29 @@ Near real-time stream of system events
 FAQ https://aws.amazon.com/cloudwatch/faqs
 
 # AWS Config
-* Enables
- * Compliance auditing
- * Security analysis
- * Rsource tracking
+* Enables:
+  * Compliance auditing
+  * Security analysis
+  * Rsource tracking
 * Provides
- * Configurations snapshots and logs config changes of AWS resources
- * Automated compliance checking
+  * Configurations snapshots and logs config changes of AWS resources
+  * Automated compliance checking
 Components
 * Dashboard
 * Rules
- * Managed
- * Custom
+  * Managed
+  * Custom
 * Resources
 * Settings
-Compliance checks
- * Trigger Periodic
- * Configuration snapshot delivery (filterable)
+Compliance checks:
+  * Trigger Periodic
+  * Configuration snapshot delivery (filterable)
 Managed Rules
- * About 40
- * Basic but fundamental
+  * About 40
+  * Basic but fundamental
 Requires:
- * IAM role with RO permissions to the recorded ressources
- * Write access to S3 logging bucket
- * Publish access to SNS
+  * IAM role with RO permissions to the recorded ressources
+  * Write access to S3 logging bucket
+  * Publish access to SNS
 
 FAQ https://aws.amazon.com/config/faqs
