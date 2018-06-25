@@ -248,3 +248,21 @@ Requires:
   * Publish access to SNS
 
 FAQ https://aws.amazon.com/config/faqs
+
+# AWS Inspector
+Agent installed on ec2
+* CVE
+* CIS operating System Security Configuration Benchmarks
+* Security Best Practice
+* Runtime Behavior Analysis
+(High, Medium, Low, Informational)
+
+# AWS Trusted Advisor
+* Cost optimiszation
+* availability
+* performance
+* Security
+
+# AWS Key Management Service
+Multi-tenant hardware (not as CloudHSM)
+region localized
