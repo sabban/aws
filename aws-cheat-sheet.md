@@ -3,6 +3,11 @@
 # STS
 
 # EC2
+ssh public key in metadata
+when private ssh key is lost, snapshot and add public key.
+
+# VPC
+only one IGW at max per VPC
 
 ## EBS
 
@@ -189,6 +194,14 @@ Two mechanisms for backing up.
 
 # KMS
 Muti-tenant
+KMS region localized
+EBS, S3, Redshift, elastic transcoder, WorkMail, RDS, ...
+Two types of key
+* customer provided
+* AWS provided
+Two types of permissions
+* key administrative permissions
+* key usage permissions 
 
 # AWS CloudHSM
 dedicated required for FIPS 140-2 Compliance
