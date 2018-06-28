@@ -6,8 +6,17 @@
 ssh public key in metadata
 when private ssh key is lost, snapshot and add public key.
 
+In case compromised EC2
+1. Shutdown the instance
+2. snapshot to forensic
+3. use it in an isolated VP
+
 # VPC
 only one IGW at max per VPC
+NACL
+first rule matches
+only way to block IP
+Applicatin load balancer span at least two subnet in two AZ with IGW
 
 ## EBS
 
