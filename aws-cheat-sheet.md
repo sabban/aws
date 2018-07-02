@@ -288,3 +288,29 @@ Agent installed on ec2
 # AWS Key Management Service
 Multi-tenant hardware (not as CloudHSM)
 region localized
+
+# AWS Shield
+ * Free service for protecting all AWS customers on ELB, cloudfront and Route 53
+ * Advanced provides enhanced protections 3000$ per month
+    * provides DDOS response team
+    read the afferent whitepaper
+
+# AWS WAF
+Application Load Balancer or cloudfront
+
+# AWS Certificate Manager
+* renew automatically if domain purchased in route53 if not for a route53 hosted zone
+* Load balancers and cloudfront
+* Cannot export certificate
+
+# API Gateway
+Throttling at 10000 requests per seconds, or 5000 at burst
+caching base on ttl
+default 300s, max at 3600s, min at 0s (disabled)
+
+ Direct connect (vpn)
+ KMS (rotation)
+ SSM
+ system manager patch manager
+ SSO from AD with or without cognito
+ guarduty
