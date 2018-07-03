@@ -1,4 +1,8 @@
 # IAM
+authentification:
+* Username/passwords
+* MFA
+* Access Keys (Access Key Id/Secret Access Key ID)
 
 # STS
 
@@ -308,9 +312,15 @@ Throttling at 10000 requests per seconds, or 5000 at burst
 caching base on ttl
 default 300s, max at 3600s, min at 0s (disabled)
 
+# GuardDuty
+Analyze cloud trail event logs VPC flow logs and DNS logs for threat-detection.
+Machine learning
+* whitelist possible
+* threatlist possible
+
  Direct connect (vpn)
  KMS (rotation)
  SSM
  system manager patch manager
  SSO from AD with or without cognito
- guarduty
+ MACI
