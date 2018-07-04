@@ -4,6 +4,10 @@ authentification:
 * MFA
 * Access Keys (Access Key Id/Secret Access Key ID)
 
+WebFederation: AssumeRoleWithWebIdentity
+AD/LDAP: AssumeRoleWithSAML
+GetFederationToken ???
+
 # STS
 
 # EC2
@@ -323,4 +327,25 @@ Machine learning
  SSM
  system manager patch manager
  SSO from AD with or without cognito
- MACI
+ Config 
+
+1ok
+2ok
+3ok
+4ok
+5ok
+6ok
+7ok
+8ko
+9ko
+10?
+11ok
+12ok
+13ok
+14ko
+15ko
+16ok
+17ok
+18ok
+19ko
+20ok
