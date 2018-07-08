@@ -9,6 +9,10 @@ AD/LDAP: AssumeRoleWithSAML
 GetFederationToken ???
 
 # STS
+* assume-role
+* assume-role-with-saml
+* assume-role-with-web-identity
+* get-session-token (MFA)
 
 # EC2
 ssh public key in metadata
@@ -18,6 +22,7 @@ In case compromised EC2
 1. Shutdown the instance
 2. snapshot to forensic
 3. use it in an isolated VP
+drmcgiftpx
 
 ## Autoscaling
 * better fault tolerance
@@ -37,17 +42,22 @@ Applicatin load balancer span at least two subnet in two AZ with IGW
 
 Types
  * General Purpose SSD gp2
- * Provisioned IOPS SSD io1
+ maximazing throughput (160MiB/s) =max size of blocks (256ko)
+ maximazing iops (10000) =min size of blocks (16ko)
+ * Provisioned IOPS (32000iops/500MiB/s) SSD io1
  * Cold HDD sc1
  * Throughput Optimized HDD st1
  * Magnetic
-
+burst=leakybucket with 5.4M credits at start in the bucket
+in=3ips per Gib for gp2
+max burst rate=3000
 Constraints
  * Scale up only
  * Volumes must be in the same AZ as the EC2 instances
  * Change types by taking snapshot and using the snapshot a new volume
  * After change on the fly, 6 hours wait before another change
-
+ * Volumes created from snapshots are Lazy restored from S3 -> forxce full read of the volume to force a restore
+ 
 ## EFS
 
  * grow and shrink automatically
@@ -165,12 +175,19 @@ virtual appliance (VMware ESXi or MS hyperV) asynchronously replicate S3 (or Gla
   * MySQL Multi-AZ deployments for high availability and read replicas for horizontal scaling
   * PostgreSQL Multi-AZ deployment for high availability and read replicas for horizontal scaling.
   * Aurora Each instance is a multi-AZ cluster (up to 15 read replicas to increase performance or multi-AZ for high availabily)
+    aurora has storage auto scaling
+    snapshot saved in S3
+    two types of replicas:
+    	* replicas with same underlying storage with low impact on master, enables failover without dataloss
+	* readreplicas
   * MariaDB has support for Multi-AZ deployment and read replicas.
   * Oracle
   * Microsoft SQL Server
 Two mechanisms for backing up.
   * automated backups (RDS feature which create a storage volume snapshots of DB instance 1 retention day by default up to 35)
   * manual snapshots
+Limitations:
+  * mssql not able to scale storage
 * DynamoDB No SQL
   * fully managed database
   * both document and key-value data
@@ -203,6 +220,11 @@ Two mechanisms for backing up.
   * BatchWriteItem
     * puts or delete mutliple items in one or more tables
     * checks for unprocessed items until all items have been processed
+  * DynamoDB Streams
+    * KEYS_ONLY
+    * NEW_IMAGE entire item after the update
+    * OLD_IMAGE entire item before the update (all can be rebuilt with the actual value)
+    * NEW_AND_OLD_IMAGES
     CONCURRENT WRITES ?
 * RedShift OLAP
 * Elasticache (In memory caching)
@@ -210,11 +232,26 @@ Two mechanisms for backing up.
   * Redis
 
 # SQS: Simple queue service
-* 256ko of text data
+* 256ko of text data (can use S3 for larger message)
 * fifo not garanteed
 * 12 hours visibility period by default
 * a message can be delivered twice
 * ChangeMessageVisibility to change the visibility timeout of a SQS message
+* possibility of fanout with multiple SQS queues subscribed to a SNS topic
+* up to 14 days retention
+
+# Amazon Kinesis
+* Kinesis Streams
+  * collect and process large streams of data in real time
+    Scenario : real time data analytics
+  * 24 hour retention
+* Kinesis Analytics
+SQL request on data stream
+
+* Kinesis Firehose
+load data to S3 or Redshift
+support compression and encryption (SSE, KMS)
+
 
 # KMS
 Muti-tenant
@@ -255,6 +292,13 @@ Near real-time stream of system events
  * scheduled
 *Rules
 *Targets (lambda, SNS, SQS, Kinesis)
+
+## Cloudwatch Alarms
+sent to SNS or autoscaling
+states:
+OK
+ALARM
+INSUFFICIENT_DATA
 
 FAQ https://aws.amazon.com/cloudwatch/faqs
 
@@ -378,6 +422,59 @@ EB with docker
 -> need Dockerfile
 -> can use a docker registry
 
+
+# AWS CLI cheatsheet
+* Autoscaling
+  * enter-standby
+  * exit-standby
+  * create-launch-configuration
+  * delete-launch-configuration
+  * update-auto-scaling-group
+  * put-lifecycle-hook
+  * put-scaling-policy
+* Cloud watch
+  * put-metric-data
+  * put-metric-alarm
+  * disable-alarm-actions
+  * enable-alarm-actions
+  * set-alarm-state
+  * list-metrics
+  * get-metric-statistic
+* Dynamodb
+  * get-item, batch-get-item, query, scan
+  * put-item, update-item, delete-item, batch-write-item
+  * create-table
+  * update-table
+* EC2
+  * run-instances
+  * stop-instances
+  * start-instances
+  * terminate-instances
+  * describe-instances
+  * wait
+  * create-image
+  * create-snapshot*
+  * copy-image
+  * copy-snapshot*
+  * create-volume*
+  * describe-tags*
+* S3
+  * mb, rb
+  * mv, rm
+  * sync
+  * website
+* S3API
+  * head-object
+  * head-bucket
+  * get/put bucket-versioning
+  * get/put bucket-acl
+  * put-bucket-notification-cofniguration (SNS, lambda)
+* SQS
+  * add-permission
+  * change-mesage-visability
+  * set-queue-attributes
+  * send-, receive, delete-message
+  
  Direct connect (vpn)
  KMS (rotation)
  SSM
