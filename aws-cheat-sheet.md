@@ -299,6 +299,8 @@ states:
 OK
 ALARM
 INSUFFICIENT_DATA
+alarm frequency has to equal or higher than metrics
+alarm accross dimension (autoscaling group for example)
 
 FAQ https://aws.amazon.com/cloudwatch/faqs
 
