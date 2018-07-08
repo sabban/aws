@@ -19,6 +19,13 @@ In case compromised EC2
 2. snapshot to forensic
 3. use it in an isolated VP
 
+## Autoscaling
+* better fault tolerance
+* better availability
+* better cost manageability
+standby possibility to debug
+detach/attach possibility for instance to an ASG
+
 # VPC
 only one IGW at max per VPC
 NACL
@@ -321,6 +328,55 @@ Analyze cloud trail event logs VPC flow logs and DNS logs for threat-detection.
 Machine learning
 * whitelist possible
 * threatlist possible
+
+# OpsWorks
+managed by layers
+lifecycle events
+* setup: event occurs when an instance has finished booting
+* configure: enters or leaves online associate or disassociate EIP, attach or detach ELB to a layer on ALL instances
+* deploy: occurs when you run the deploy command on an instance
+* undeploy: occurs when you  delete application or run undeploy
+* shutdown runs when an instance is shutdown but before instance is terminated. Allow cleanup
+ Instances:
+* 24/7 instances
+* time based instances
+* load-based instances
+five applications version (rollback to try to return to the precedent)
+from chef 11.10 chef allow external sources of recipes (berkshelf)
+Databags:
+global json objects accessible within the chef framework include STACK, LAYER, APP, INSTANCE
+Properties:
+* use of an agent on each instance
+* heartbeat style health check with "auto-heal"
+auto-heal in case connection is lost:
+EBS-backed:stop-start
+instance store: terminate-launch
+-> configure event
+
+# Elastic Beanstalk
+deploy, monitor, scale
+applications can have multiple environments
+swappable url
+sqs is used to message between different beanstalk environment
+RDS is not copied when cloning EB environment
+node;js
+php
+python
+ruby
+IIS
+java
+golang
+tomcat
+docker container
+
+ebextensions=customizations
+yaml
+possibilty to choose a leader instance for environment creation (to make commmand run once)
+call to cloudformation !!
+
+EB with docker
+-> need Dockerfile
+-> can use a docker registry
 
  Direct connect (vpn)
  KMS (rotation)
