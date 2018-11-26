@@ -1,12 +1,23 @@
 # IAM
 authentification:
-* Username/passwords
-* MFA
-* Access Keys (Access Key Id/Secret Access Key ID)
+ * Username/passwords
+ * MFA
+ * Access Keys (Access Key Id/Secret Access Key ID)
+
+4 types of roles:
+1. AWS service Role (assume by service ec2, lambda, ...)
+2. AWS Service-Linked Role (Amazon Lex Bots, Amazon Lex Channels)
+3. Role for (cross) account access
+4. Role for Identity Provider Access
 
 WebFederation: AssumeRoleWithWebIdentity
 AD/LDAP: AssumeRoleWithSAML
-GetFederationToken ???
+
+Other Feature
+ * password policy in IAM
+ * possibility to deactivate sts in certain regions
+ * credential report 
+ * KMS
 
 # STS
 * assume-role
