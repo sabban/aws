@@ -356,6 +356,9 @@ FAQ https://aws.amazon.com/config/faqs
  * CIS operating System Security Configuration Benchmarks
  * Security Best Practice
  * Runtime Behavior Analysis
+* Telemetry data collected from an instance
+* Assessment reports
+* Findings: potential security issue
 
 # AWS Trusted Advisor
 * Cost optimiszation
