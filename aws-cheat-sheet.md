@@ -1,4 +1,5 @@
 # IAM
+
 authentification:
  * Username/passwords
  * MFA
@@ -10,13 +11,14 @@ authentification:
 3. Role for (cross) account access
 4. Role for Identity Provider Access
 
-WebFederation: AssumeRoleWithWebIdentity
-AD/LDAP: AssumeRoleWithSAML
+ WebFederation: AssumeRoleWithWebIdentity
+
+ AD/LDAP: AssumeRoleWithSAML
 
 Other Feature
  * password policy in IAM
  * possibility to deactivate sts in certain regions
- * credential report 
+ * credential report
  * KMS
 
 # STS
@@ -47,7 +49,7 @@ only one IGW at max per VPC
 NACL
 first rule matches
 only way to block IP
-Applicatin load balancer span at least two subnet in two AZ with IGW
+Application load balancer span at least two subnet in two AZ with IGW
 
 ## EBS
 
@@ -68,7 +70,7 @@ Constraints
  * Change types by taking snapshot and using the snapshot a new volume
  * After change on the fly, 6 hours wait before another change
  * Volumes created from snapshots are Lazy restored from S3 -> forxce full read of the volume to force a restore
- 
+
 ## EFS
 
  * grow and shrink automatically
@@ -189,7 +191,7 @@ virtual appliance (VMware ESXi or MS hyperV) asynchronously replicate S3 (or Gla
     aurora has storage auto scaling
     snapshot saved in S3
     two types of replicas:
-    	* replicas with same underlying storage with low impact on master, enables failover without dataloss
+    * replicas with same underlying storage with low impact on master, enables failover without dataloss
 	* readreplicas
   * MariaDB has support for Multi-AZ deployment and read replicas.
   * Oracle
@@ -292,7 +294,7 @@ Validation with sha-256 with public key against AWS' private key
 * monitoring
 
 ## Cloudwatch Logs
-Stored indefinitely (not user S3)
+Can be stored indefinitely (not user S3)
 
 ## Cloudwatch Events
 Near real-time stream of system events
@@ -301,8 +303,8 @@ Near real-time stream of system events
  * Aws CloudTrail (API calls)
  * custom events (code)
  * scheduled
-*Rules
-*Targets (lambda, SNS, SQS, Kinesis)
+* Rules
+* Targets (lambda, SNS, SQS, Kinesis)
 
 ## Cloudwatch Alarms
 sent to SNS or autoscaling
@@ -344,12 +346,16 @@ Requires:
 FAQ https://aws.amazon.com/config/faqs
 
 # AWS Inspector
-Agent installed on ec2
-* CVE
-* CIS operating System Security Configuration Benchmarks
-* Security Best Practice
-* Runtime Behavior Analysis
-(High, Medium, Low, Informational)
+* Agent installed on ec2
+* Need for a role (Read only access to EC2 instances)
+* assessment targets : set of EC2 instances to be assess against (group by tags)
+* AWS agents
+* Assessment templates (Define a specific configuration as to how an assessment is run)
+* Rules Pacakges & Rules
+ * CVE
+ * CIS operating System Security Configuration Benchmarks
+ * Security Best Practice
+ * Runtime Behavior Analysis
 
 # AWS Trusted Advisor
 * Cost optimiszation
