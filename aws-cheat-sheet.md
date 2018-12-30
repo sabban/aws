@@ -358,7 +358,7 @@ FAQ https://aws.amazon.com/config/faqs
  * Runtime Behavior Analysis
 * Telemetry data collected from an instance
 * Assessment reports
-* Findings: potential security issue or risk (comes with explanation and guidance to solve)
+* Findings: potential security issue or risk (comes with explanation and guidance to solve and a level  high, medium, low, informational)
 -> Use AWS lambda to schedule assessment run.
 
 # AWS Trusted Advisor
