@@ -361,6 +361,12 @@ FAQ https://aws.amazon.com/config/faqs
 * Findings: potential security issue or risk (comes with explanation and guidance to solve and a level  high, medium, low, informational)
 -> Use AWS lambda to schedule assessment run.
 
+Limits:
+* max 500 agents per assessment (hard limit)
+* max 50k assessments run per accounts
+* max 500 assessments templates
+* max 50 assessments target
+
 # AWS Trusted Advisor
 * Cost optimiszation
 * availability
