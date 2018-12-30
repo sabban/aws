@@ -348,7 +348,7 @@ FAQ https://aws.amazon.com/config/faqs
 # AWS Inspector
 * Agent installed on ec2
 * Need for a role (Read only access to EC2 instances)
-* assessment targets : set of EC2 instances to be assess against (group by tags)
+* Assessment targets : set of EC2 instances to be assess against (group by tags)
 * AWS agents
 * Assessment templates (Define a specific configuration as to how an assessment is run)
 * Rules Pacakges & Rules
@@ -358,7 +358,8 @@ FAQ https://aws.amazon.com/config/faqs
  * Runtime Behavior Analysis
 * Telemetry data collected from an instance
 * Assessment reports
-* Findings: potential security issue
+* Findings: potential security issue or risk (comes with explanation and guidance to solve)
+-> Use AWS lambda to schedule assessment run.
 
 # AWS Trusted Advisor
 * Cost optimiszation
