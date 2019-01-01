@@ -397,10 +397,22 @@ caching base on ttl
 default 300s, max at 3600s, min at 0s (disabled)
 
 # GuardDuty
-Analyze cloud trail event logs VPC flow logs and DNS logs for threat-detection.
+Analyze
+* cloud trail event logs
+* VPC flow logs
+* DNS logs
+* optionally supports cloudwatch event log
 Machine learning
-* whitelist possible
-* threatlist possible
+* 1 whitelist possible
+* 6 threatlist possible
+
+possible to link multiple AWS account: members account send copy of
+finding to master account but master account can't disable members'
+account guardduty
+
+Use specific IAM permissions to create a service-linked role that
+allow GuardDuty to retrieve needed information.
+
 
 # OpsWorks
 managed by layers
