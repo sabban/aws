@@ -317,6 +317,18 @@ alarm accross dimension (autoscaling group for example)
 
 FAQ https://aws.amazon.com/cloudwatch/faqs
 
+## Cloudwatch agent
+
+### Two roles
+
+* A role for configuration with policies
+ * CloudWatchAgentAdminPolicy
+ * AmazonEC2RoleforSSM
+
+* A role for production with policies
+ * CloudWatchAgentServerPolicy
+ * AmazonEC2RoleforSSM
+
 # AWS Config
 * Enables:
   * Compliance auditing
