@@ -281,12 +281,15 @@ Two types of permissions
 dedicated required for FIPS 140-2 Compliance
 
 # Cloudtrail
-* Send to S3 bucket
+* Send to S3 bucket or optionally cloudwatch
 * delivered every 5 (active) minutes  with up to 15 minutes delay
 * notifications available
 * can be aggregated accross regions
 * can be aggregated accross accounts
 Validation with sha-256 with public key against AWS' private key
+
+When logs are sent to cloudwatch a 256kb limit is applied, logs are
+not sent if the evfent is oversized.
 
 # Cloudwatch
 
@@ -319,17 +322,20 @@ FAQ https://aws.amazon.com/cloudwatch/faqs
 
 ## Cloudwatch agent
 
-### Two roles
 
-* A role for configuration with policies
- * CloudWatchAgentAdminPolicy
- * AmazonEC2RoleforSSM
-
-* A role for production with policies
- * CloudWatchAgentServerPolicy
- * AmazonEC2RoleforSSM
+Required:
+* Two roles
+ * A role for configuration with policies
+  * CloudWatchAgentAdminPolicy
+  * AmazonEC2RoleforSSM
+ * A role for production with policies
+  * CloudWatchAgentServerPolicy
+  * AmazonEC2RoleforSSM
+* Internet acces required to communicate with SSM and cloudwatch endpoints
+* (Optionnally) SSM agent installed, configuration file stored in SSM parameter store
 
 # AWS Config
+once per region and region specific
 * Enables:
   * Compliance auditing
   * Security analysis
@@ -352,8 +358,14 @@ Managed Rules
   * Basic but fundamental
 Requires:
   * IAM role with RO permissions to the recorded ressources
-  * Write access to S3 logging bucket
+  * Write access to S3 logging bucket (updated each 6 hours)
   * Publish access to SNS
+Configuration Item
+ * Metadata (version, configuration id, md5 timestamp, state id)
+ * Attributes
+ * Relationships
+ * Current configuration (describe or list)
+ * Related events (cloudtrail event id)
 
 FAQ https://aws.amazon.com/config/faqs
 
@@ -475,6 +487,15 @@ EB with docker
 -> need Dockerfile
 -> can use a docker registry
 
+# AWS CloudHSM
+
+dedicated appliance
+deployed in one vpc
+scalability, availability, performance are relying on customer's use
+can be multi-region with the right setup
+api call are logged in cloudtrail
+internal log are sent to a syslog IP endpoint
+need an ec2 instance with python2.7, pip, and aws aws-cloudhsm-cli
 
 # AWS CLI cheatsheet
 * Autoscaling
