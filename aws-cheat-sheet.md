@@ -497,6 +497,47 @@ api call are logged in cloudtrail
 internal log are sent to a syslog IP endpoint
 need an ec2 instance with python2.7, pip, and aws aws-cloudhsm-cli
 
+# Cloudformation
+ * Parameters (user input)
+ * Resources  (only section mandatory) (logical ID and a type are mandatory, properties describing resource)
+ * Outputs (for display and use in parents stacks, fn::GetAtt very useful to access properties of other resources)
+ * Intrinsic Functions and Conditionals
+   * Fn::Base64
+   * Fn::FindInMap
+   * Fn::GetAtt
+   * Fn::GetAZs
+   * Fn::Join
+   * Fn::Select
+   * Ref
+   * Fn::And
+   * Fn::Equals
+   * Fn::If
+   * Fn::Not
+   * Fn::Or
+460k limit
+200 resources, 100mappings, 60parameters, 60 output
+## DependsOn
+Cloudformation knows about inner dependence in AWS resources (vpc before its subnets, subnets before ec2, etc)
+but DependsOn allow creating dependencies out of our stack
+stack can be chain-nested
+CreationPolicies for EC2 or autoscaling resource wait for cfn-signal
+waitHandle and waitCondition handler are two cloudformation resources that creates a URL to signal cloudformation a resource is finished
+data can be passed by waitCondition handler
+
+## Resource Deletion Policies
+DeletionPolicy
+ * Delete (default)
+ * Retain
+ * Snapshot (ec2::volume, RDS::DBCluster, RDS::DBInstance Redshift::Cluster)
+
+## Stack update
+Default without policy update allowed
+Default with a policy update denierd
+
+## Custom Resource
+use SNS or lambda 
+
+"Ref:" to reference another resource/parameter
 # AWS CLI cheatsheet
 * Autoscaling
   * enter-standby
@@ -548,13 +589,7 @@ need an ec2 instance with python2.7, pip, and aws aws-cloudhsm-cli
   * change-mesage-visability
   * set-queue-attributes
   * send-, receive, delete-message
-  
- Direct connect (vpn)
- KMS (rotation)
- SSM
- system manager patch manager
- SSO from AD with or without cognito
- Config 
+
 
 1ok
 2ok
