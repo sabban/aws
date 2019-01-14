@@ -43,6 +43,7 @@ drmcgiftpx
 * better cost manageability
 standby possibility to debug
 detach/attach possibility for instance to an ASG
+scaling dynamically or time-based
 
 # VPC
 only one IGW at max per VPC
@@ -243,6 +244,13 @@ Limitations:
 * Elasticache (In memory caching)
   * Memcached
   * Redis
+  
+## Partitions
+limited to:
+* 10GB
+* 3000 RCU
+* 1000 WCU 
+When limit is exceeded a new partition is created
 
 # SQS: Simple queue service
 * 256ko of text data (can use S3 for larger message)
@@ -487,6 +495,14 @@ EB with docker
 -> need Dockerfile
 -> can use a docker registry
 
+Deployemment:
+* Rolling
+* all at once
+* Rolling with additional batch
+* immutable
+
+one rds instance can be linked only to one environment
+
 # AWS CloudHSM
 
 dedicated appliance
@@ -536,6 +552,71 @@ Default with a policy update denierd
 
 ## Custom Resource
 use SNS or lambda 
+
+## Helper scripts
+* cfn-init
+* cfn-signal
+* cfn-get-metadata
+* cfn-hup
+
+## Pseudo parameters
+AWS::Region
+AWS::AccountId
+AWS::NotificationARNs
+AWS::NoValue
+AWS::Partition
+AWS::StackId
+AWS::StackName
+AWS::URLSuffix
+
+# AWS OpsWorks
+
+Chef:
+description of final states with cookbooks (set of recipes)
+
+Composed of:
+* Opsworks agent in ec2
+* Opsworks service = chef server
+
+Features beside configuration of machine:
+* Creating, updating, deleting various AWS infrastructure components
+* handling lod balancing
+* auto scaling
+* auto healing
+
+Architecture
+* Stack a set of layer
+* Layer set of different configuration
+
+5 lifecycle events
+* setup (when an instance has finished booting)
+* configure (enters or leaves online, associate or disassociate EIP, attach or detech load balancer to a layer on **ALL** instances)
+* deploy  (occurs when you run the deploy command on an instance)
+* undeploy (when you delete an application or run an undeploy)
+* shutdown (after shutdown before termination)
+
+3 instances types
+* 24/7
+* time-based
+* load-based (per-layer configuration with simple scaling or cloudwatch alarm)
+
+An RDS instance can only be associated with one opsWorks Stack
+A stack clone operation doesn't copy an existing RDS instance
+
+Possible application source: git, http, s3
+5 versions of the app are maintened current and four historic
+
+create-deployment command
+1. creates application deployments
+2. allows stack level commands to be executed agains the stack
+
+Berkshelf allow install cookbooks from multiple repositories from chef 11.10
+Databags allow access to contextual information within recipes (possible in stack, layer, instance and application level)
+
+auto-healing
+EBS backed: stop start
+instance store: terminate launch
+triggers a configure event on all instances
 
 "Ref:" to reference another resource/parameter
 # AWS CLI cheatsheet
